@@ -1,7 +1,0 @@
-#! ruby
-
-CSV.open("bo.csv","wb") do |csv|
- data.each do |bo|
-  csv << bo
- end
-end
