@@ -1,0 +1,26 @@
+ # -*- coding: utf-8 -*-                                                        
+require 'open-uri'
+require 'nokogiri'
+require "date"
+require 'csv'
+atom = open('http://www.google.co.jp/trends/hottrends/atom/hourly')
+doc = Nokogiri::HTML(atom)
+#puts doc                                                                       
+dt = Date.today	
+filename = "google_trends.csv"
+outfile = File.open(filename, 'a')
+doc.xpath("/html/body/feed/entry/content/li/span/a").each {|element|
+	time = Time.now
+	puts time
+	puts element.text
+        puts element[:href]
+	word = element.text
+	data = [[time, word]]
+	CSV::Writer::generate(outfile) do | writer |
+	  data.each do | item |
+	    writer << item
+	  end
+	end
+}
+
+
