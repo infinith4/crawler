@@ -9,5 +9,5 @@ while(1){
     if ($ret != 0) {
         print "code[$ret]\n";
     }
-    sleep(12);
+    sleep(300);
 }
